@@ -1,0 +1,45 @@
+.details-body p {
+  font-size: 18px;
+  font-family: AdineuePRO, Helvetica, Bahnschrift, Georgia, 'times new roman', serif;
+}
+
+.details-body p span,
+th {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.btn-container .btn{
+  width: 130px;
+  font-weight: 400;
+  font-size: 20px;
+  font-family: AdineuePRO, Helvetica, Bahnschrift, Georgia, 'times new roman', serif;
+  letter-spacing: 2px;
+}
+
+.btn-container .btn .btn-success{
+  background-color: darkolivegreen;
+}
+
+.btn-container .btn .btn-danger{
+  background-color: red;
+}
+
+.form-edit div label {
+  font-weight: 700;
+  font-size: 18px;
+  font-family: AdineuePRO, Helvetica, Bahnschrift, Georgia, 'times new roman', serif;
+}
+
+.error-form {
+  font-size: 14px !important;
+  color: red !important;
+  margin: 10px 15px 0px 0px !important;
+}
+
+.loading-obj {
+  width: 110px;
+  height: 110px;
+  position: relative;
+  align-self: center;
+}

@@ -1,0 +1,98 @@
+article img {
+  width: 100%;
+  /*height: 100%;*/
+}
+
+article{
+  background-color: #eceff1;
+  border: 1px solid #eceff1;
+}
+
+.shoe-title {
+  text-align: center !important;
+  height: 50px;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  flex-direction: column;
+  border: 1px solid #eceff1;
+  border-bottom: 0px
+}
+.shoe-price {
+  border: 1px solid #eceff1;
+  border-top: 0px
+}
+
+fa-icon{
+  cursor: pointer;
+}
+
+.collapse-header {
+  cursor:pointer;
+  font-weight: 700;
+}
+
+.list-group-item{
+  cursor: pointer;
+}
+
+.list-group-item:hover{
+  background-color: #ebedee;
+}
+.listSize {
+  border: 1px solid black !important;
+  margin-bottom: 5px;
+  border-radius: 0px;
+  width: 48%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.listSize:hover,
+.listSize:active{
+  background-color: #ebedee;
+}
+
+.filterCollapsing-header {
+  background-color: white;
+  border-color: #ebedee;
+  border-radius: 0px !important;
+  border-bottom: 0px;
+}
+
+.filterCollapsing-header a {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-family: AdihausDIN,Helvetica,Arial,sans-serif;
+  font-weight: 700;
+  background-color: white;
+}
+
+.filterCollapsing-body {
+  z-index: 9;
+}
+
+.filterCollapsing-body ul {
+  border: 1px solid #ebedee;
+}
+
+.filterCollapsing-body ul li {
+  background-color: white;
+  border: 0;
+  cursor: pointer;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  transition: background .1s cubic-bezier(.3,0,.45,1);
+}
+
+.filterCollapsing-body ul li:hover {
+  background-color: #ebedee;
+}

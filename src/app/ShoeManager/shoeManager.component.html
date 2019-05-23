@@ -1,0 +1,102 @@
+<div *ngIf="loading" class="d-flex justify-content-center col-md-12" style="align-items: center; height: calc( 100vh - 90px)">
+  <img src="{{config.loader}}" alt="" style="padding-bottom: 200px">
+</div>
+
+<div class="d-flex flex-row mt-4" style="width: 85%; position: relative;left: 7.5%;" *ngIf="!loading">
+  <aside class="col-md-2">
+    <div class="card">
+      <div class="card-header">
+        <a class="d-flex flex-row justify-content-between col-12 p-0 collapse-header" (click)="brandCollapsing = !brandCollapsing">
+          Brand
+          <fa-icon [icon]="!brandCollapsing ? faDown : faUp">
+          </fa-icon>
+        </a>
+      </div>
+      <div class="card-body p-0" [ngClass]="brandCollapsing ? 'collapse show' : 'collapse'">
+        <ul class="list-group" *ngFor="let item of listBrand">
+          <li class="text-capitalize list-group-item border-0">
+            <a (click)="shoeService">{{item}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <a class="d-flex flex-row justify-content-between col-12 p-0 collapse-header" (click)="sizeCollapsing = !sizeCollapsing">
+          Size
+          <fa-icon [icon]="!sizeCollapsing ? faDown : faUp">
+          </fa-icon>
+        </a>
+      </div>
+      <div class="card-body d-flex flex-row flex-wrap justify-content-between p-2" [ngClass]="sizeCollapsing ? 'collapse show' : 'collapse'" >
+          <a class="text-capitalize listSize" *ngFor="let item of listSize">
+            {{item}}
+          </a>
+      </div>
+    </div>
+  </aside>
+  <div class="col-md-10 d-flex flex-column ">
+
+    <div class="col-md-12 d-flex flex-row justify-content-between mb-3" style="height: 50px; max-height: 50px">
+      <div></div>
+
+      <div class="card col-md-2 p-0">
+        <div class="card-header filterCollapsing-header">
+          <a class="d-flex flex-row justify-content-between col-12 p-0"
+             (click)="filterCollapsing = !filterCollapsing">
+            {{selectedFilter}}
+            <fa-icon [icon]="!filterCollapsing ? faDown : faUp">
+            </fa-icon>
+          </a>
+        </div>
+        <div class="card-body p-0 filterCollapsing-body" [ngClass]="filterCollapsing ? 'collapse show' : 'collapse'" [hidden]="!filterCollapsing">
+          <ul class="list-group">
+            <li class="text-capitalize list-group-item" style="border-bottom: 2.5px solid #ebedee"
+                (click)="changeFilter('Added on')">
+              Added on
+            </li>
+
+            <li class="text-capitalize list-group-item" style="border-bottom: 2.5px solid #ebedee"
+                (click)="changeFilter('Buying Price')">
+              Buying Price
+            </li>
+
+            <li class="text-capitalize list-group-item" (click)="changeFilter('Selling Price')">
+              Selling Price
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-check-inline col-md-4" hidden>
+        <label for="sortBox" class="form-check-label">Sort By</label>
+        <select class="form-inline" name="sortBy" [(ngModel)]="sortBy" id="sortBox">
+          <option value="">Newest</option>
+          <option value="">Buying price</option>
+          <option value="">Selling price</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-12 d-flex flex-row justify-content-start flex-wrap">
+      <div class="col-md-3 mb-3 pl-1 pr-1" *ngFor="let item of listShoes">
+        <a class="text-decoration-none" style="color: inherit" routerLink="/shoes/{{config.utf8ToBase64(item.idShoe)}}">
+          <article>
+            <img [src]="sanitize.bypassSecurityTrustUrl(item.image)">
+          </article>
+          <p class="shoe-title">{{item.brand}} - {{item.model}}</p>
+          <p class="shoe-price d-flex flex-row justify-content-between mb-0 pr-1 pl-1">
+            <span>{{item.buyingPrice}}</span>
+            <span>-</span>
+            <span>{{item.sellingPrice}}</span>
+          </p>
+        </a>
+      </div>
+  </div>
+
+  </div>
+
+</div>
+
+<div>
+
+</div>

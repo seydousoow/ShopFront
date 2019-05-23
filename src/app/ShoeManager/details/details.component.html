@@ -1,0 +1,132 @@
+<div *ngIf="loading" class="d-flex justify-content-center col-md-12" style="align-items: center; height: calc( 100vh - 90px)">
+  <img src="{{config.loader}}" alt="" style="padding-bottom: 200px">
+</div>
+
+<div class="card col-md-8 offset-2 p-0 mt-md-5 border-0" *ngIf="!loading">
+  <div class="card-header font-weight-bold" style="font-size: 30px;text-align: center;">
+      Details
+  </div>
+  <div class="card-body d-flex flex-row justify-content-md-between p-0 pt-3 pb-3">
+    <aside class="col-md-6">
+      <img [src]="shoe.image" style="width: 100%;">
+    </aside>
+    <img [src]="config.loader" class="loading-obj" *ngIf="loadingObject"/>
+    <div class="col-md-6 details-body" *ngIf="!isEditing">
+      <p><span>Brand:</span> {{shoe.brand}}</p>
+      <p><span>Model:</span> {{shoe.model}}</p>
+      <p><span>Added at:</span> {{shoe.addedAt | date : 'MMMM dd, y h:mm a'}}</p>
+      <p><span>Description:</span> {{shoe.description}}</p>
+      <p><span>Buying price:</span> {{shoe.buyingPrice}}</p>
+      <p><span>Selling price:</span> {{shoe.sellingPrice}}</p>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Size</th>
+          <th>Quantity</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let size of shoe.listSize">
+          <td>{{size.size}}</td>
+          <td>{{size.quantity}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center btn-container">
+        <button class="btn btn-success mr-5" (click)="isEditing = true">Edit&nbsp;<fa-icon [icon]="faEdit"></fa-icon></button>
+        <button class="btn btn-danger" (click)="deleteConfirmation()">Delete&nbsp;<fa-icon [icon]="faTrash"></fa-icon></button>
+      </div>
+    </div>
+
+    <div class="col-md-6 details-body" *ngIf="isEditing">
+      <form #f="ngForm" class="form-edit">
+        <div class="form-group">
+          <label>Change the picture : &nbsp;&nbsp;&nbsp;</label>
+          <input type="file" class="form-control" accept="image/*" id="imageSelection" name="imageSelection"
+                 (change)="handleFileSelect($event)" hidden/>
+          <button class="btn btn-outline-primary" (click)="selectImage()">Select new image</button>
+        </div>
+
+        <div class="form-group">
+          <label>Brand <sup>*</sup></label>
+          <input type="text" class="form-control" #brand="ngModel" name="brand" [(ngModel)]="shoe.brand" required>
+          <div *ngIf="brand.dirty && brand.errors?.required">
+            <p class="error-form">A brand name is required for each shoe</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Model <sup>*</sup></label>
+          <input type="text" class="form-control" #model="ngModel" name="model" [(ngModel)]="shoe.model" required>
+          <div *ngIf="model.dirty && model.errors?.required">
+            <p class="error-form">The model of this shoe cannot be empty</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Buying Price <sup>*</sup></label>
+          <input type="text" class="form-control" name="buyingPrice" #buyingPrice="ngModel" [(ngModel)]="shoe.buyingPrice"
+                 pattern="^\d{0,7}(\.\d{1,2})?$" required>
+          <div *ngIf="buyingPrice.dirty && buyingPrice.errors?.required">
+            <p class="error-form">A buying price is required. if it's not known, please put Zero (0)</p>
+          </div>
+
+          <div *ngIf="buyingPrice.dirty && buyingPrice.errors?.pattern">
+            <p class="error-form">The buying must be between 0.0 and 9999999.9999</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Selling Price <sup>*</sup></label>
+          <input type="text" class="form-control" #sellingPrice="ngModel" name="sellingPrice" [(ngModel)]="shoe.sellingPrice"
+                 pattern="^\d{0,7}(\.\d{1,2})?$" required>
+          <div *ngIf="sellingPrice.dirty && sellingPrice.errors?.required">
+            <p class="error-form">A selling price is required. if it's not known, please put Zero (0)</p>
+          </div>
+
+          <div *ngIf="sellingPrice.dirty && sellingPrice.errors?.pattern">
+            <p class="error-form">The sales price must be between 0.0 and 9999999.9999</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" class="form-control" name="description" [(ngModel)]="shoe.description">
+        </div>
+        <p class="text-danger h5"><span style="font-size: 22px">Attention:</span> Setting a quantity to zero will result in a deletion of that size from the list during the update</p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let size of listSize; let i = index">
+              <td>
+                <input type="number" min=30 max=50 class="form-control" [id]="'size' + i" name="sizeSize{{i}}" [(ngModel)]="size.size">
+              </td>
+              <td>
+                <input type="number" min=0 max=100 class="form-control" name="sizeQuantity{{i}}" [(ngModel)]="size.quantity">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-around pl-5 pr-5 btn-container">
+          <button class="btn btn-outline-primary" (click)="newRowToSizeTable()" style="width: 150px;">Add Size
+            <fa-icon [icon]="faPlus"></fa-icon> </button>
+          <button class="btn btn-outline-primary ml-5" (click)="updateShoe()" style="width: 150px;"
+                  [disabled]="f.invalid">
+            Save &nbsp;<fa-icon [icon]="faSave"></fa-icon>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+

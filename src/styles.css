@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*
+ *normal Style
+ */
+@font-face {
+  font-family: AdihausDIN;
+  src: url("/assets/fonts/adidas/AdihausDIN-Regular.woff2?hash=1GJVa") format("woff2"),
+  url("/assets/fonts/adidas/AdihausDIN-Regular.ttf?hash=1GVK3") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/*
+ * bold style
+ */
+@font-face {
+  font-family: AdihausDIN;
+  src: url("/assets/fonts/adidas/AdihausDIN-Bold.woff2?hash=1oG5G") format("woff2"),
+  url("/assets/fonts/adidas/AdihausDIN-Bold.ttf?hash=12lnk") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/*AdineuePRO*/
+/*adineue PRO*/
+
+
+@font-face {
+  font-family: AdineuePRO;
+  src: url("/assets/fonts/adidas/adineuePRO-Regular.woff2?hash=1RLZb") format("woff2"),
+  url("/assets/fonts/adidas/adineuePRO-Regular.woff?hash=1NBvc") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/*AdineuePRO*/
+/*adineue PRO Bold*/
+
+
+@font-face {
+  font-family: AdineuePRO;
+  src: url("/assets/fonts/adidas/adineuePRO-Bold.woff2?hash=27DK-") format("woff2"),
+  url("/assets/fonts/adidas/adineuePRO-Bold.woff?hash=3YGyv") format("woff");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+body {
+  font-family: AdihausDIN, Helvetica, Arial, sans-serif !important;
+  font-style: normal;
+  font-weight: 400 !important;
+  /*color: #000;*/
+  text-rendering: optimizeLegibility;
+}
